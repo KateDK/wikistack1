@@ -1,5 +1,6 @@
 const express = require('express');
-const router = express.Router(); //creates a
+const router = express.Router(); //creates a routwer
+const models = require('../models');
 
 const {
   addPage,
@@ -16,6 +17,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  console.log('THIS IS MY REQ BODY', req.body);
   res.json(req.body);
 });
 

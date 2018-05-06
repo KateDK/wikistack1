@@ -14,6 +14,7 @@ const app = express();
 app.use(morgan('dev')); //logging middlewear
 app.use(express.static(path.join(__dirname, './public'))); //finds the directory we want to nake 'public'/exposed
 app.use(bodyParser.json()); //just becouse express needs it
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/wiki', wikiRouter);
 app.use('/user', userRouter);
 
