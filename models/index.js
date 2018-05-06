@@ -7,6 +7,13 @@ db.authenticate().then(() => {
   console.log('connected to the db');
 });
 
+//helper function for slug
+function generateSlug(title) {
+  // Removes all non-alphanumeric characters from title
+  // And make whitespace underscore
+  return title.replace(/\s+/g, '_').replace(/\W/g, '');
+}
+
 const Page = db.define('page', {
   title: {
     type: Sequelize.STRING,
@@ -24,6 +31,13 @@ const Page = db.define('page', {
     type: Sequelize.ENUM('open', 'close'),
   },
 });
+
+Page.beforeValidate(page => {
+  if (!page.slug) {
+    page.slug = generateSlug(page.title);
+  }
+});
+
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
